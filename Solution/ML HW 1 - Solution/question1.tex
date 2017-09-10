@@ -1,0 +1,86 @@
+\section{Decision Tree}
+\label{sec:q1}
+
+\begin{enumerate}
+\item 
+\begin{enumerate}
+\item 
+$(x_1\land x_2)\lor(x_1\land x_3)$\\\\
+\fbox{
+	\begin{forest}
+	for tree={l sep+=.8cm,s sep+=4cm,shape=rectangle, rounded corners,
+    draw, align=center,
+    top color=white, bottom color=gray!20}
+	[$x_1$
+		[$x_2$, edge label = {node[midway, left]{$1$}}
+			[$1$, edge label = {node[midway, left]{$1$}}]
+			[$x_3$, edge label = {node[midway, right]{$0$}}
+				[$1$, edge label = {node[midway, left]{$1$}}]
+				[$0$, edge label = {node[midway, right]{$0$}}]			
+			]
+		]
+		[$0$, edge label = {node[midway, right]{$0$}}		]
+	]
+	\end{forest}
+}
+
+\item 
+$(x_1\lor x_2)\ xor\ x_3$\\
+\fbox{
+	\begin{forest}
+	for tree={l sep+=.5cm,s sep+=1.5cm,shape=rectangle, rounded corners,
+    draw, align=center,
+    top color=white, bottom color=gray!20}
+		[$x_1$
+			[$x_2$, edge label = {node[midway, left]{$1$}}
+				[$x_3$, edge label = {node[midway, left]{$1$}}
+					[$0$, edge label = {node[midway, left]{$1$}}]
+					[$1$, edge label = {node[midway, right]{$0$}}]				
+				]
+				[$x_3$, edge label = {node[midway, right]{$0$}}
+					[$1$, edge label = {node[midway, left]{$1$}}]
+					[$0$, edge label = {node[midway, right]{$0$}}]	
+				]			
+			]
+			[$x_3$, edge label = {node[midway, right]{$0$}}
+				[$1$, edge label = {node[midway, left]{$1$}}]
+				[$0$, edge label = {node[midway, right]{$0$}}]			
+			]		
+		]
+	\end{forest}
+}
+	
+\item
+$\neg A \lor \neg B \lor \neg C \lor \neg D$\\
+\fbox{
+	\begin{forest}
+	for tree={l sep+=.4cm,s sep+=2cm,shape=rectangle, rounded corners,
+    draw, align=center,
+    top color=white, bottom color=gray!20}	
+	[$A$
+		[$1$, edge label = {node[midway, left]{$0$}}]
+		[$B$, edge label = {node[midway, right]{$1$}}
+			[$1$, edge label = {node[midway, left]{$0$}}]
+			[$C$, edge label = {node[midway, right]{$1$}}
+				[$1$, edge label = {node[midway, left]{$0$}}]
+				[$D$, edge label = {node[midway, right]{$1$}}
+					[$1$, edge label = {node[midway, left]{$0$}}]
+					[$0$, edge label = {node[midway, right]{$1$}}]				
+				]			
+			]		
+		]	
+	]
+	\end{forest}
+}
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+\end{enumerate}
