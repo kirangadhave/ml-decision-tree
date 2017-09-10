@@ -72,10 +72,80 @@ $\neg A \lor \neg B \lor \neg C \lor \neg D$\\
 	]
 	\end{forest}
 }
+\\\\
+\end{enumerate}
+
+\item 
+\begin{enumerate}
+\item
+\item
+$S=9$\\
+$p_+ = 5/9 = 0.56$\\
+$p_- = 4/9 = 0.44$\\
+
+$Entropy(S) = -p_+\log_2 p_+ - p_-\log_2 p_-$\\
+$Entropy(S) = -0.56\log_2 0.56 - 0.44\log_2 0.44$\\
+$Entropy(S) = 0.99$
+
+\item
+Information gain of an attribute $A$ is given by,
+
+\begin{equation*}
+Gain(S,A) = Entropy(S) - \sum_{v \in Values(A)}\frac{|S_v|}{|S|}Entropy(S_v)
+\end{equation*}
+
+\begin{enumerate}
+\item Feature $A$ = Technology\\
+
+For $v = Yes$,\\
+$S_v = 3$\\
+$p_+ = 1/3$ \ \ \ 
+$p_- = 2/3$\\
+$Entropy(S_v) = 0.918$\\
+
+For $v = No$,\\
+$S-v = 6$\\
+$Entropy(S_v) = 0.918$\\
+
+$Gain(S, Technology) = 0.99 - (6/9)0.918 - (3/9)0.918 = 0.071$\\
+
+\item Feature $A$ = Environment\\
+$Gain(S, Environment) = 0.228$\\
+
+\item Feature $A$ = Human\\
+$Gain(S, Human) = 0.629$\\
+
+\item Feature $A = Distance$\\
+$Gain(S,Distance) = 0.155$\\
 \end{enumerate}
 
 
+\item 
+The attribute $Human$ provides the best prediction of target attribute $Invade$ according to the information gain measure. So I will use attribute $Human$ as root node.\\
 
+\item
+\fbox{
+	\begin{forest}
+	for tree={l sep+=.4cm,s sep+=2cm,shape=rectangle, rounded corners,
+    draw, align=center,
+    top color=white, bottom color=gray!20}	
+	[$Human$
+		[$Yes$, edge label = {node[midway, left]{$Not Care$}}]
+		[$Technology$, edge label = {node[midway, right]{$Like$}}
+			[$Environment$, edge label = {node[midway, left]{$Yes$}}
+				[$Distance$, edge label = {node[midway, left]{$Yes$}}]
+				[$Distance$, edge label = {node[midway, right]{$No$}}]
+			]
+			[$Environment$, edge label = {node[midway, right]{$No$}}
+				[$Distance$, edge label = {node[midway, left]{$Yes$}}]
+				[$Distance$, edge label = {node[midway, right]{$No$}}]
+			]		
+		]
+		[$No$, edge label = {node[midway, right]{$Hate$}}]	
+	]
+	\end{forest}
+}
+\end{enumerate}
 
 
 
