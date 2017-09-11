@@ -1,4 +1,4 @@
-This is LuaTeX, Version beta-0.80.0 (TeX Live 2015/Debian) (rev 5238)  (format=lualatex 2017.9.5)  10 SEP 2017 12:26
+This is LuaTeX, Version beta-0.80.0 (TeX Live 2015/Debian) (rev 5238)  (format=lualatex 2017.9.5)  11 SEP 2017 17:59
  restricted \write18 enabled.
 **hw.tex
 (./hw.tex
@@ -691,6 +691,18 @@ Package: xparse 2016/01/19 v6377 L3 Experimental document command parser
 \forest@externalize@max@outer@n=\count161
 \forest@externalize@inner@n=\count162
 )
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2015/03/04 v2.20.2
+\thm@style=\toks42
+\thm@bodyfont=\toks43
+\thm@headfont=\toks44
+\thm@notefont=\toks45
+\thm@headpunct=\toks46
+\thm@preskip=\skip52
+\thm@postskip=\skip53
+\thm@headsep=\skip54
+\dth@everypar=\toks47
+)
 
 LaTeX Warning: Unused global option(s):
     [fullpage].
@@ -698,18 +710,18 @@ LaTeX Warning: Unused global option(s):
 (./hw.aux)
 \openout1 = hw.aux
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -752,12 +764,12 @@ LaTeX Font Info:    ... okay on input line 21.
 \scratchbox=\box75
 \nofMPsegments=\count164
 \nofMParguments=\count165
-\everyMPshowfont=\toks42
+\everyMPshowfont=\toks48
 \MPscratchCnt=\count166
 \MPscratchDim=\dimen261
 \MPnumerator=\count167
 \makeMPintoPDFobject=\count168
-\everyMPtoPDFconversion=\toks43
+\everyMPtoPDFconversion=\toks49
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO)
 
@@ -774,7 +786,7 @@ Package pdftexcmds Info: \pdfdraftmode found.
 Package: luatex-loader 2010/03/09 v0.4 Lua module loader (HO)
 
 (/usr/share/texlive/texmf-dist/scripts/oberdiek/oberdiek.luatex.lua))
-\pdftexcmds@toks=\toks44
+\pdftexcmds@toks=\toks50
 )
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -865,62 +877,73 @@ Underfull \hbox (badness 10000) in paragraph at lines 124--125
  []
 
 
-Overfull \hbox (17.45656pt too wide) in paragraph at lines 147--148
-[][][] 
+Overfull \hbox (17.40831pt too wide) in paragraph at lines 126--170
+[] 
  []
 
-) (./question2.tex
+) (./question2.tex [3]
+Underfull \hbox (badness 10000) in paragraph at lines 7--8
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+ []
 
-[3
-Missing character: There is no ’ (U+2019) in font cmr12!
-]) (./question3.tex [4]
 
-LaTeX Warning: Reference `tb-alien-train' on page 5 undefined on input line 54.
+Underfull \hbox (badness 10000) in paragraph at lines 12--13
 
-[5
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 32--33
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 57--58
+
+ []
+
+) (./question3.tex [4] [5
 Missing character: There is no − (U+2212) in font cmr12!
-]) (./experiment-submission-guidelines.tex) (./question4.tex
-<fig-1.pdf, id=32, 238.8925pt x 587.19376pt>
-File: fig-1.pdf Graphic file (type pdf)
- <use fig-1.pdf>
-Package pdftex.def Info: fig-1.pdf used on input line 19.
-(pdftex.def)             Requested size: 97.56493pt x 239.81021pt.
+]
 
+LaTeX Warning: Reference `tb-alien-train' on page 6 undefined on input line 54.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+) (./experiment-submission-guidelines.tex [6]) (./question4.tex [7] [8]
+Underfull \hbox (badness 10000) in paragraph at lines 55--57
 
-) [6] [7<./fig-1.pdf>] (./hw.aux)
+ []
+
+) [9] (./hw.aux)
 
 LaTeX Warning: There were undefined references.
 
 )
 
 Here is how much of LuaTeX's memory you used:
- 30863 strings out of 495004
+ 33018 strings out of 495004
  125171,794899 words of node,token memory allocated
- 366 words of node memory still in use:
-   6 hlist, 2 vlist, 2 rule, 2 glue, 1 kern, 45 glue_spec, 1 write nodes
-   avail lists: 1:3,2:61,3:1578,4:1618,5:229,6:3180,7:58,9:700,10:244
- 33669 multiletter control sequences out of 65536+600000
- 47 fonts using 1857703 bytes
- 156i,12n,173p,804b,2495s stack positions out of 5000i,500n,10000p,200000b,100000s
+ 382 words of node memory still in use:
+   6 hlist, 2 vlist, 2 rule, 2 glue, 1 kern, 46 glue_spec, 1 write nodes
+   avail lists: 2:61,3:1589,4:1408,5:227,6:3272,7:63,9:701,10:243
+ 35811 multiletter control sequences out of 65536+600000
+ 57 fonts using 2250275 bytes
+ 156i,12n,173p,823b,4232s stack positions out of 5000i,500n,10000p,200000b,100000s
 <</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><</usr
 /share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><</usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><</usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><</usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><</usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmr17.pfb><</usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmr8.pfb><</usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmsy10.pfb><</usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmsy8.pfb><</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmti12.pfb><</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
-t12.pfb>
-Output written on hw.pdf (7 pages, 145307 bytes).
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><</usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><</usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><</usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmib10.pfb><</usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr10.pfb><</usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr12.pfb><</usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr17.pfb><</usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr8.pfb><</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy10.pfb><</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pf
+b><</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><</u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on hw.pdf (9 pages, 172796 bytes).
 
-PDF statistics: 83 PDF objects out of 1000 (max. 8388607)
- 58 compressed objects within 1 object stream
+PDF statistics: 93 PDF objects out of 1000 (max. 8388607)
+ 66 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 131072)
  22 words of extra memory for PDF output out of 10000 (max. 10000000)
 

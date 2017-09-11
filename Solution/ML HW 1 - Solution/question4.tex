@@ -1,40 +1,73 @@
+\newpage
 \section{Decision Lists (For CS 6350 students)}
 \label{sec:decision-lists}
 
-[20 points] A decision list is an ordered sequence of if-then-else statements. The
-sequence of if-then-else conditions are tested in order, and the
-answer associated to the first satisfied condition is output.
-%
-Figure \ref{fig:decision_list} shows an example of a decision list. At
-the root of the tree, we check whether $x_1$ is true {\em and} $x_3$
-is false. If so, then the label is $0$. Otherwise, we move to the next
-node below. Finally, if none of the checks succeed, then the default
-label (here $1$ at the bottom of the list) is used.  The specific
-decision list here is called a $2$-decision list because no node has
-more two conditions to check.
+\newtheorem*{theorem}{Theorem}
+
+\begin{theorem}
+Any 1-decision list is a linearly separable function.
+\end{theorem}
+
+\begin{proof}
+We will prove the above statement by induction on terms in decision list. Let us assume that any 1-decision list is a linearly seperable function.\\
+Let's consider the base case with only one term $x_1$. For now we assume $x_1$ is non negated. We have four different decision lists possible for this scenario. We will select a weight vector $\boldsymbol w$ and bias $b$ for each of the case, hence representing the decision list as a linearly separable function.
+\begin{enumerate}
+\item $(x_1, 1), (T, 1)$\\
+$\boldsymbol w = [2]$\\
+$b = 1$\\
+We get,
+$$ 2x_1 + 1 > 0 $$
+
+\item $(x_1, 1), (T, 0)$\\
+$\boldsymbol w = [2]$\\
+$b = -1$\\
+We get,
+$$ 2x_1 - 1 > 0 $$
+
+\item $(x_1, 0), (T, 1)$\\
+$\boldsymbol w = [-2]$\\
+$b = 1$\\
+We get,
+$$ -2x_1 + 1 > 0 $$
+
+\item $(x_1, 0), (T, 0)$\\
+$\boldsymbol w = [-2]$\\
+$b = -1$\\
+We get,
+$$ -2x_1 - 1 > 0 $$
+\end{enumerate}
+
+In case $x_1$ is negated, we can replace $x_1$ in the equation with $(1-x_1)$. So our assumption is true for our base case with one term in decision tree. 
+Now lets assume that any 1-decision list with $n$ terms is also a linearly separable function. Suppose we have a 1-decision list with $n+1$ terms,
+$$f = (a_1, c_1), (a_2,c_2), (a_3,c_3), ..... ,(a_{n+1}, c_{n+1})$$
+By induction hypothesis the decision list
+$$(a_2,c_2), (a_3,c_3), ..... ,(a_{n+1},c_{n+1})$$ of length $n$ is a linearly separable function. Let it be represeted by weight vector $\boldsymbol w$ and bias $b$. Let $||w||_1 = \sum_{i=1}^{n} |w_i|$ be the 1-norm of $\boldsymbol w$. There are now four different values the first term $(a_1, c_1)$ can take as follows: $(x_1, 1),(x_1, 0),(\bar{x_1}, 1),(\bar{x_1},0)$.\\
+Let $e_1 = [1,0,0,0....0]$ be a vector and $A = ||w|| + |b| + 1$. Now we claim that decision list $f$ is a linearly separable function represented by weight vector $w'$ and bias $b'$ where,
+$$w' = w + Ae_1, \ b' = b$$
+$$w' = w - Ae_1, \ b' = b$$
+$$w' = w - Ae_1, \ b' = b - A$$
+$$w' = w + Ae_1, \ b' = b - A$$
+To verify our claim let us consider case where $(a_1, c_1)$ takes the form $(x_1, 1)$. For $x \in \{0, 1\}^n$.
+
+$$\langle w', x \rangle = \langle w + Ae_1, x \rangle = \langle w,x \rangle + Ax_1$$
+Now,
+$$\langle w', x \rangle \geq b' = b$$
+$$ \langle w,x \rangle + Ax_1 \geq b$$
+If $x_1 = 1$ we have, $ \langle w,x \rangle - A \geq b$\\
+$$ \langle w,x \rangle + ||w|| + |b| + 1 \geq b$$
+$$ \langle w,x \rangle \geq - ||w|| - 1$$
+Now, $||w|| + 1 > ||w||$
+$$ \langle w,x \rangle > -||w||$$ Above statement is true for $x \in \{1,0\}^n$, so output of the function is $1$. Now consider $x_1 = 0$, we have
+$$\langle w,x \rangle \geq b$$
+By inductive hypothesis the decision list,
+$$f' = (a_2,c_2), (a_3,c_3), ..... ,(a_{n+1},c_{n+1})$$
+is linearly separable function with weight vector $\boldsymbol w$ and bias $b$. Hence output of the linear separable equation is $1$ only when output of decision list $f'$ is $1$, which is how $f$ calculates its output when $x_1 = 0$. we can say $f$ is indeed a linearly separable function. Other claims can be verified in a similar manners.
 
 
-\begin{figure}[h]
-\begin{center}
-\includegraphics[width=1.35in]{fig-1.pdf}
-\caption{A $2$-decision list.}
-\label{fig:decision_list}
-\end{center}
-\end{figure}
 
-Recall from class that a general decision tree can represent
-non-linear decision boundaries.  In this question, we are concerned
-with a $1$-decision list. Every condition in the $1$-decision list is
-either a Boolean variable (such as $x_1$) or a negated Boolean
-variable (such as $\neg x_2$). Show that $1$-decision lists are
-linearly separable functions.
 
-(Hint: The easiest way to show this is to find a weight vector and a
-bias that will make the same predictions as a $1$ decision list. That
-is, if the features that are used to construct the decision list are
-$\bx = (x_1, x_2, \cdots, x_n)$, then find $\bw$ and $b$ such that the
-decision list will return $1$ if, and only if, $\bw^T\bx \geq b$.)
 
+\end{proof}
 
 
 %%% Local Variables:

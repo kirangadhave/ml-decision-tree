@@ -123,28 +123,65 @@ $Gain(S,Distance) = 0.155$\\
 \item 
 The attribute $Human$ provides the best prediction of target attribute $Invade$ according to the information gain measure. So I will use attribute $Human$ as root node.\\
 
-\item
+\item Decision Tree using Human Attribute as root node.\\
 \fbox{
+{\footnotesize
 	\begin{forest}
-	for tree={l sep+=.4cm,s sep+=2cm,shape=rectangle, rounded corners,
+	for tree={l sep+=.2cm,s sep+=0.1cm,shape=rectangle, rounded corners,
     draw, align=center,
     top color=white, bottom color=gray!20}	
 	[$Human$
 		[$Yes$, edge label = {node[midway, left]{$Not Care$}}]
-		[$Technology$, edge label = {node[midway, right]{$Like$}}
+		[$Technology$, edge label = {node[midway, midway]{$Like$}}
 			[$Environment$, edge label = {node[midway, left]{$Yes$}}
-				[$Distance$, edge label = {node[midway, left]{$Yes$}}]
-				[$Distance$, edge label = {node[midway, right]{$No$}}]
+				[$Distance$, edge label = {node[midway, left]{$Yes$}}
+					[$Y$, edge label = {node[midway, midway]{$1$}}]
+					[$Y$, edge label = {node[midway, midway]{$2$}}]
+					[$Yes$, edge label = {node[midway, midway]{$3$}}]
+					[$Y$, edge label = {node[midway, midway]{$4$}}]				
+				]
+				[$Distance$, edge label = {node[midway, right]{$No$}}
+					[$No$, edge label = {node[midway, midway]{$1$}}]
+					[$N$, edge label = {node[midway, midway]{$2$}}]
+					[$N$, edge label = {node[midway, midway]{$3$}}]
+					[$No$, edge label = {node[midway, midway]{$4$}}]	
+				]
 			]
 			[$Environment$, edge label = {node[midway, right]{$No$}}
-				[$Distance$, edge label = {node[midway, left]{$Yes$}}]
-				[$Distance$, edge label = {node[midway, right]{$No$}}]
+				[$Distance$, edge label = {node[midway, left]{$Yes$}}
+					[$N$, edge label = {node[midway, midway]{$1$}}]
+					[$N$, edge label = {node[midway, midway]{$2$}}]
+					[$No$, edge label = {node[midway, midway]{$3$}}]
+					[$N$, edge label = {node[midway, midway]{$4$}}]		
+				]
+				[$Distance$, edge label = {node[midway, right]{$No$}}
+					[$N$, edge label = {node[midway, midway]{$1$}}]
+					[$N$, edge label = {node[midway, midway]{$2$}}]
+					[$N$, edge label = {node[midway, midway]{$3$}}]
+					[$N$, edge label = {node[midway, midway]{$4$}}]			
+				]
 			]		
 		]
 		[$No$, edge label = {node[midway, right]{$Hate$}}]	
 	]
 	\end{forest}
+}\\
 }
+
+\item Predictions: \\
+ \begin{table}[h]
+        \centering
+        \begin{tabular}{cccc|c|c}
+        \hline
+        Technology & Environment & Human & Distance & Invade(Prediction) & Invade (Given) \\ \hline
+        Yes        & Yes         & Like  & 2        & Yes       		   & No\\
+        No         & No          & Hate  & 3        & No       		   & No\\
+        Yes        & Yes         & Lkie  & 4        & Yes       		   & Yes\\ \hline
+        \end{tabular}
+        \end{table}
+
+Accuracy is $2/3$
+
 \end{enumerate}
 
 
