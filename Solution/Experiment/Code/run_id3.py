@@ -12,4 +12,9 @@ data = np.array(de.get_data(training_file))
 data = de.extract_features_and_labels(data)
 features = data[:,:-1]
 labels = data[:,-1]
+
+temp = dtc.information_gain(np.array([features[:,0], labels]).transpose())
+
+
+
 ### End Features
