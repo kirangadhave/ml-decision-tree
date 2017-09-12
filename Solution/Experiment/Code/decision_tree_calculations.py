@@ -8,7 +8,11 @@ def entropy(list_l):
        ent = ent - x/sum(value_count)*math.log(x/sum(value_count), 2)
     return(ent)
     
-def information_gain(list_av):
+def information_gain(list_av, S, S_ent):
     unique_values = np.array([list_av[list_av[:,0] == x] for x in set(list_av[:,0])])
-    print(unique_values)
+    ig = S_ent
+    for x in unique_values:
+        x_t = x[:,1]
+        ig = ig - (x_t.size/S)*entropy(x_t)
+    return ig
        

@@ -13,7 +13,7 @@ data = de.extract_features_and_labels(data)
 features = data[:,:-1]
 labels = data[:,-1]
 
-temp = dtc.information_gain(np.array([features[:,0], labels]).transpose())
+temp = dtc.information_gain(np.array([features[:,0], labels]).transpose(), labels.size, dtc.entropy(labels))
 
 
 
