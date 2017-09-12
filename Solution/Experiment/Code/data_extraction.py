@@ -57,6 +57,7 @@ def extract_features_and_labels(data):
         first_even_features.append(int(len(x.split(' ')[0])%2 == 0))
     first_even_features = np.array(first_even_features)
     
+    # Map labels
     label = []
     for x in data[:,0]:
         if x == '+':
