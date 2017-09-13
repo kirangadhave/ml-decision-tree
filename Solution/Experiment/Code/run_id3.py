@@ -61,8 +61,8 @@ def iterate_on_tree(tree, x):
 prediction = []
 actual_output = []
 
-def predict():
-    test_data = de.extract_features_and_labels(np.array(de.get_data(test_file)))
+def predict(file):
+    test_data = de.extract_features_and_labels(np.array(de.get_data(file)))
     actual_output = test_data[:,-1]
     test_data = test_data[:,:-1]
     for x in test_data:
@@ -78,4 +78,4 @@ def predict():
 
 tree = create_tree(data, labels)
 
-predict()
+predict(training_file)

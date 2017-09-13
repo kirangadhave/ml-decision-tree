@@ -71,8 +71,9 @@ def extract_features_and_labels(data):
     label = np.array(label)
     
     
-
     return np.array([flln_feature, midd_feature, first_se_feature, alpha_feature, sec_vow_feature, first_vow_feature, last_even_features, first_even_features, label]).transpose()
+
+#    return np.array([flln_feature, midd_feature, first_se_feature, alpha_feature, sec_vow_feature, first_vow_feature, last_even_features, first_even_features, label]).transpose()
 
     
 def add_header(data):
