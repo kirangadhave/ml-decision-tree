@@ -5,6 +5,8 @@ import decision_tree_calculations as dtc
 import data_extraction as de
 
 training_file = os.path.abspath( "../Dataset/updated_train.txt")
+test_file = os.path.abspath( "../Dataset/updated_test.txt")
+
 data = np.array(de.get_data(training_file))
 
 data = de.extract_features_and_labels(data)
@@ -37,7 +39,7 @@ def create_tree(data, labels):
     best_feature = dtc.highest_gain(data[:,:-1], data[:,-1])
     best_feature_label = labels[best_feature]
     tree = {best_feature_label : {}}
-   
+    
     del(labels[best_feature])
     feature_values = [x[best_feature] for x in data]
     unique_vals = set(feature_values)
@@ -47,5 +49,33 @@ def create_tree(data, labels):
         tree[best_feature_label][val] = create_tree(split_data(data.tolist(), best_feature, val), sub_labels)
     return tree
 
+def iterate_on_tree(tree, x):
+    if type(tree) is np.int64:
+        return tree
+    key_no = list(tree.keys())[0]
+    val = x[key_no]
+    temp = x[:key_no]
+    temp = np.append(temp, x[key_no:]) 
+    return iterate_on_tree(tree[key_no][val], temp)
+    
+prediction = []
+actual_output = []
+
+def predict():
+    test_data = de.extract_features_and_labels(np.array(de.get_data(test_file)))
+    actual_output = test_data[:,-1]
+    test_data = test_data[:,:-1]
+    for x in test_data:
+        val = iterate_on_tree(tree, x)
+        prediction.append(val)
+    correct = 0
+    for i,x in enumerate(prediction):
+        if x == actual_output[i]:
+            correct += 1
+    
+    print(correct/len(actual_output)*100)
+    
+
 tree = create_tree(data, labels)
-print(tree)
+
+predict()
