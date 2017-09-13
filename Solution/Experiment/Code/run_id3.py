@@ -84,9 +84,35 @@ def predict_and_calc_accuracy(file, actual_output):
             correct += 1
     return float(correct/len(actual_output)*100)
 
-def prune_tree():
-    print("")    
+def create_pruned_tree(data, labels, depth=0, depth_limit = 1):
+    global depth_tree
+    global tree_order
     
+    classes = [x[-1] for x in data]
+    if classes.count(classes[0]) == len(classes):
+        return classes[0]
+    if len(data[0]) == 1:
+        return most_freq(classes)
+    
+    best_feature = dtc.highest_gain(data[:,:-1], data[:,-1])
+    best_feature_label = labels[best_feature]
+    tree = {best_feature_label : {}}
+    
+    del(labels[best_feature])
+    feature_values = [x[best_feature] for x in data]
+    unique_vals = set(feature_values)
+ 
+    if(depth_limit == 0):
+        return most_freq(classes)    
+        
+    if(depth_tree < depth or len(tree_feature_order) == 0):
+        depth_tree = depth
+        tree_feature_order.append(best_feature_label)
+    
+    for val in unique_vals:
+        sub_labels = labels[:]
+        tree[best_feature_label][val] = create_pruned_tree(split_data(data.tolist(), best_feature, val), sub_labels, depth+1, depth_limit - 1)
+    return tree
 
 
 training_file = os.path.abspath( "../Dataset/updated_train.txt")
@@ -102,10 +128,10 @@ print("Extracting Features from training data: Done")
 data = de.extract_features_and_labels(data)
 labels = de.create_labels(data)
 print("")
-
+tree = create_pruned_tree(data, labels,0,4)
 print("Running ID3")
 print("Tree created")
-tree = create_tree(data, labels)
+#tree = create_tree(data, labels)
 print("")
 print("")
 print(tree)
@@ -123,4 +149,3 @@ predictions = predict(test_file)
 plt.scatter(range(len(actual_output)),actual_output, marker = 'o')
 plt.scatter(range(len(actual_output)),actual_output, marker = 'x')
 plt.show()
-print(tree_order)
