@@ -24,11 +24,12 @@ def most_freq(classes):
     return sorted_counts[0][0]
 
 depth_tree = 0
+tree_feature_order = []
 
 def create_tree(data, labels, depth=0):
     global depth_tree
-    if(depth_tree < depth):
-        depth_tree = depth
+    global tree_order
+    
     classes = [x[-1] for x in data]
     if classes.count(classes[0]) == len(classes):
         return classes[0]
@@ -41,6 +42,11 @@ def create_tree(data, labels, depth=0):
     del(labels[best_feature])
     feature_values = [x[best_feature] for x in data]
     unique_vals = set(feature_values)
+    
+    
+    if(depth_tree < depth or len(tree_feature_order) == 0):
+        depth_tree = depth
+        tree_feature_order.append(best_feature_label)
     
     for val in unique_vals:
         sub_labels = labels[:]
@@ -80,6 +86,8 @@ def predict_and_calc_accuracy(file, actual_output):
 
 def prune_tree():
     print("")    
+    
+
 
 training_file = os.path.abspath( "../Dataset/updated_train.txt")
 test_file = os.path.abspath( "../Dataset/updated_test.txt")
@@ -115,4 +123,4 @@ predictions = predict(test_file)
 plt.scatter(range(len(actual_output)),actual_output, marker = 'o')
 plt.scatter(range(len(actual_output)),actual_output, marker = 'x')
 plt.show()
-print(depth_tree)
+print(tree_order)
