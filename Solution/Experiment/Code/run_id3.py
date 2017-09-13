@@ -3,14 +3,7 @@ import numpy as np
 import operator
 import decision_tree_calculations as dtc
 import data_extraction as de
-
-training_file = os.path.abspath( "../Dataset/updated_train.txt")
-test_file = os.path.abspath( "../Dataset/updated_test.txt")
-
-data = np.array(de.get_data(training_file))
-
-data = de.extract_features_and_labels(data)
-labels = de.create_labels(data)
+import matplotlib.pyplot as plt
 
 def split_data(data, split_column, value):
     newdata = []
@@ -30,7 +23,12 @@ def most_freq(classes):
     sorted_counts = sorted(class_count.items(), key = operator.itemgetter(1), reverse = True)
     return sorted_counts[0][0]
 
-def create_tree(data, labels): 
+depth_tree = 0
+
+def create_tree(data, labels, depth=0):
+    global depth_tree
+    if(depth_tree < depth):
+        depth_tree = depth
     classes = [x[-1] for x in data]
     if classes.count(classes[0]) == len(classes):
         return classes[0]
@@ -46,7 +44,7 @@ def create_tree(data, labels):
     
     for val in unique_vals:
         sub_labels = labels[:]
-        tree[best_feature_label][val] = create_tree(split_data(data.tolist(), best_feature, val), sub_labels)
+        tree[best_feature_label][val] = create_tree(split_data(data.tolist(), best_feature, val), sub_labels, depth+1)
     return tree
 
 def iterate_on_tree(tree, x):
@@ -58,10 +56,8 @@ def iterate_on_tree(tree, x):
     temp = np.append(temp, x[key_no:]) 
     return iterate_on_tree(tree[key_no][val], temp)
     
-prediction = []
-actual_output = []
-
 def predict(file):
+    prediction = []
     test_data = de.extract_features_and_labels(np.array(de.get_data(file)))
     actual_output = test_data[:,-1]
     test_data = test_data[:,:-1]
@@ -72,10 +68,51 @@ def predict(file):
     for i,x in enumerate(prediction):
         if x == actual_output[i]:
             correct += 1
-    
-    print(correct/len(actual_output)*100)
-    
+    return prediction
 
+def predict_and_calc_accuracy(file, actual_output):
+    preds = predict(file)
+    correct = 0
+    for i,x in enumerate(preds):
+        if x == actual_output[i]:
+            correct += 1
+    return float(correct/len(actual_output)*100)
+
+def prune_tree():
+    print("")    
+
+training_file = os.path.abspath( "../Dataset/updated_train.txt")
+test_file = os.path.abspath( "../Dataset/updated_test.txt")
+print("")
+print("")
+print("Reading Training Data: ")
+print("Reading Training Data: Done")
+data = np.array(de.get_data(training_file))
+print("")
+print("Extracting Features from training data:")
+print("Extracting Features from training data: Done")
+data = de.extract_features_and_labels(data)
+labels = de.create_labels(data)
+print("")
+
+print("Running ID3")
+print("Tree created")
 tree = create_tree(data, labels)
+print("")
+print("")
+print(tree)
+print("")
+print("")
 
-predict(training_file)
+print("Reading and processing test_data")
+test_data = np.array(de.get_data(test_file))
+test_data =  de.extract_features_and_labels(test_data)
+print("Classifying Test Data Results")
+print("Accuracy is : " + str(predict_and_calc_accuracy(test_file, test_data[:,-1])))
+
+actual_output = test_data[:,-1]
+predictions = predict(test_file)
+plt.scatter(range(len(actual_output)),actual_output, marker = 'o')
+plt.scatter(range(len(actual_output)),actual_output, marker = 'x')
+plt.show()
+print(depth_tree)
