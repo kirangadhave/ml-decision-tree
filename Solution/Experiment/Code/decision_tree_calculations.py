@@ -16,3 +16,11 @@ def information_gain(list_av, S, S_ent):
         ig = ig - (x_t.size/S)*entropy(x_t)
     return ig
        
+def highest_gain(features, label):
+    S = label.size
+    S_ent = entropy(label)    
+    gain = {}
+    for i,x in enumerate(features.transpose()):
+        g = information_gain(np.array([x, label]).transpose(), S, S_ent)
+        gain[i] = g
+    return max(gain, key = gain.get)

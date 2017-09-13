@@ -2,6 +2,7 @@ import os
 import numpy as np
 import data_extraction as de
 import decision_tree_calculations as dtc
+import id3
 
 training_file = os.path.abspath( "../Dataset/updated_train.txt")
 data = np.array(de.get_data(training_file))
@@ -10,11 +11,12 @@ data = np.array(de.get_data(training_file))
 
 # Gets features described above and maps the label to 1 = '+' and 0 = '-'
 data = de.extract_features_and_labels(data)
+
+data = de.add_header(data)
+
 features = data[:,:-1]
 labels = data[:,-1]
 
-temp = dtc.information_gain(np.array([features[:,0], labels]).transpose(), labels.size, dtc.entropy(labels))
-
-
+#emp = id3.generate_tree(data)
 
 ### End Features

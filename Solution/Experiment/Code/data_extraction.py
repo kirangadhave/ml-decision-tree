@@ -11,7 +11,7 @@ def extract_features_and_labels(data):
     # First Name longer than last name
     flln_feature = []
     for x in data[:,1]:
-        flln_feature.append(int(x.split(' ')[0] >= x.split(' ')[-1]))
+        flln_feature.append(int(len(x.split(' ')[0]) > len(x.split(' ')[-1])))
     flln_feature = np.array(flln_feature)
     
     # Middle Name present
@@ -57,6 +57,12 @@ def extract_features_and_labels(data):
         first_even_features.append(int(len(x.split(' ')[0])%2 == 0))
     first_even_features = np.array(first_even_features)
     
+    # Last name second last vowle
+    both_even_features = []
+    for x in data[:,1]:
+        both_even_features.append(int(str.lower(x.split(' ')[-1][-2]) in ['a', 'e', 'i', 'o', 'u']))
+    both_even_features = np.array(first_even_features)
+    
     # Map labels
     label = []
     for x in data[:,0]:
@@ -66,5 +72,41 @@ def extract_features_and_labels(data):
             label.append(0)
     
     label = np.array(label)
+    
+    
 
-    return np.array([flln_feature, midd_feature, first_se_feature, alpha_feature, sec_vow_feature, first_vow_feature, last_even_features, first_even_features, label]).transpose()
+    return np.array([flln_feature, midd_feature, first_se_feature, alpha_feature, sec_vow_feature, first_vow_feature, last_even_features, first_even_features, both_even_features, label]).transpose()
+
+    
+def add_header(data):
+    headers = list(range(0, data.shape[1] - 1))
+    headers.append(-1)
+    headers = np.array(headers)
+    data = data.transpose()
+    headers = headers.T
+    return np.insert(data, 0, headers,1).transpose()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
