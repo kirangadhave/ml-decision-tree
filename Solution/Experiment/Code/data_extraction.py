@@ -86,7 +86,15 @@ def add_header(data):
     headers = headers.T
     return np.insert(data, 0, headers,1).transpose()
 
+def create_labels(data):
+    headers = list(range(0, data.shape[1] - 1))
+    return headers
 
+def remove_header(data, axis=0):
+    print(np.delete(data, 0, axis))
+    return np.delete(data, 0, axis)
+
+    
 
 
 

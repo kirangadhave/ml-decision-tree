@@ -1,7 +1,11 @@
 import numpy as np
 import math
+import data_extraction as de
 
 def entropy(list_l):
+    if list_l[0] == -1:
+        list_l = np.delete(list_l, 0)
+        
     value_count = [list_l.tolist().count(i) for i in set(list_l)]
     ent = 0
     for x in value_count:
@@ -17,7 +21,7 @@ def information_gain(list_av, S, S_ent):
     return ig
        
 def highest_gain(features, label):
-    S = label.size
+    S = len(label)
     S_ent = entropy(label)    
     gain = {}
     for i,x in enumerate(features.transpose()):
