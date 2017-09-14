@@ -133,10 +133,11 @@ def create_pruned_tree(data, labels, depth=0, depth_limit = 1):
 
 
 def question1c():
+    global depth_tree
     data = np.array(de.get_data(training_file))
     data = de.extract_features_and_labels(data)
     labels = de.create_labels(data)
-
+    depth_tree = 0
     tree = create_tree(data, labels)
 
     test_data = np.array(de.get_data(test_file))
@@ -155,6 +156,7 @@ def question1c():
     output.append("Question 1-c")
     output.append("########################################")
     output.append("Accuracy on training data: " + str(round(accuracy,2)))
+    output.append("Error on training data: " + str(round(100 - accuracy,2)))
     output.append("Depth of the tree is: " + str(depth_tree))
     output.append("########################################")
     with open(os.path.abspath("TraceFiles/question1c.trace"), 'w', ) as file:
@@ -163,10 +165,11 @@ def question1c():
         print(x)
 
 def question1d():
+    global depth_tree
     data = np.array(de.get_data(training_file))
     data = de.extract_features_and_labels(data)
     labels = de.create_labels(data)
-
+    depth_tree = 0
     tree = create_tree(data, labels)
 
     test_data = np.array(de.get_data(test_file))
@@ -185,6 +188,7 @@ def question1d():
     output.append("Question 1-d")
     output.append("########################################")
     output.append("Accuracy on test data: " + str(round(accuracy,2)))
+    output.append("Accuracy on test data: " + str(round(100 - accuracy,2)))
     output.append("Depth of the tree is: " + str(depth_tree))
     output.append("########################################")
     with open(os.path.abspath("TraceFiles/question1d.trace"), 'w', ) as file:
@@ -193,13 +197,13 @@ def question1d():
         print(x)
 
 def question2():
+    global depth_tree
     split_folder = os.path.abspath(sys.argv[3])
     depths = list(map(int, sys.argv[4:]))
     
     kfold_files = []
     for (dirpath, d, files) in os.walk(split_folder):
         kfold_files = [os.path.join(dirpath,x) for x in files]
-    
     data_0 = np.array(de.get_data(kfold_files[0]))
     data_1 = np.array(de.get_data(kfold_files[1]))
     data_2 = np.array(de.get_data(kfold_files[2]))
@@ -237,7 +241,7 @@ def question2():
         
         train_d4 = de.extract_features_and_labels(train_4)
         labels_4 = de.create_labels(train_d4)
-        
+        depth_tree = 0
         tree_1 = create_pruned_tree(train_d1, labels_1, 0, depth)
         depth_tree = 0
         tree_2 = create_pruned_tree(train_d2, labels_2, 0, depth)        
@@ -258,7 +262,11 @@ def question2():
         
     max_acc = max(depth_accuracy_dict, key = depth_accuracy_dict.get)
     output = []
-    
+
+    plt.plot([x for x in depth_accuracy_dict.keys()], [depth_accuracy_dict[x] for x in depth_accuracy_dict.keys()], )
+    plt.xlabel("Depth of tree")
+    plt.ylabel("Accuracy")
+    plt.show()
     for x in depth_accuracy_dict:
         output.append("============")
         output.append("Depth = " + str(x))

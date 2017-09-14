@@ -1,5 +1,6 @@
 Question 1-c
 ########################################
 Accuracy on training data: 94.38
+Error on training data: 5.62
 Depth of the tree is: 7
 ########################################

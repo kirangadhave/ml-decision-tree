@@ -42,7 +42,12 @@ Now lets assume that any 1-decision list with $n$ terms is also a linearly separ
 $$f = (a_1, c_1), (a_2,c_2), (a_3,c_3), ..... ,(a_{n+1}, c_{n+1})$$
 By induction hypothesis the decision list
 $$(a_2,c_2), (a_3,c_3), ..... ,(a_{n+1},c_{n+1})$$ of length $n$ is a linearly separable function. Let it be represeted by weight vector $\boldsymbol w$ and bias $b$. Let $||w||_1 = \sum_{i=1}^{n} |w_i|$ be the 1-norm of $\boldsymbol w$. There are now four different values the first term $(a_1, c_1)$ can take as follows: $(x_1, 1),(x_1, 0),(\bar{x_1}, 1),(\bar{x_1},0)$.\\
-Let $e_1 = [1,0,0,0....0]$ be a vector and $A = ||w|| + |b| + 1$. Now we claim that decision list $f$ is a linearly separable function represented by weight vector $w'$ and bias $b'$ where,
+Let $e_1 = [1,0,0,0....0]$ be a vector and 
+
+\begin{equation}
+A = ||w|| + |b| + 1
+\end{equation}
+Now we claim that decision list $f$ is a linearly separable function represented by weight vector $w'$ and bias $b'$ where,
 $$w' = w + Ae_1, \ b' = b$$
 $$w' = w - Ae_1, \ b' = b$$
 $$w' = w - Ae_1, \ b' = b - A$$
@@ -64,10 +69,9 @@ $$f' = (a_2,c_2), (a_3,c_3), ..... ,(a_{n+1},c_{n+1})$$
 is linearly separable function with weight vector $\boldsymbol w$ and bias $b$. Hence output of the linear separable equation is $1$ only when output of decision list $f'$ is $1$, which is how $f$ calculates its output when $x_1 = 0$. we can say $f$ is indeed a linearly separable function. Other claims can be verified in a similar manners.
 
 
-
-
-
 \end{proof}
+
+The idea for substitution in (1) was as seen in 'CDAM Research Report LSE-CDAM-2002-11' titled 'Threshold Decision Lists' by Martin Anthony. We make this substituion as a claim and go on to prove it.
 
 
 %%% Local Variables:
