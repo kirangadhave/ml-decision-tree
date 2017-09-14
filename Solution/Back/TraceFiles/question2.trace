@@ -1,0 +1,50 @@
+============
+Depth = 1
+Average Accuracy = 82.66
+Standard Deviation = 2.24
+============
+============
+Depth = 2
+Average Accuracy = 88.06
+Standard Deviation = 1.48
+============
+============
+Depth = 3
+Average Accuracy = 89.19
+Standard Deviation = 2.3
+============
+============
+Depth = 4
+Average Accuracy = 92.79
+Standard Deviation = 3.66
+============
+============
+Depth = 6
+Average Accuracy = 93.47
+Standard Deviation = 1.33
+============
+============
+Depth = 7
+Average Accuracy = 93.24
+Standard Deviation = 1.49
+============
+============
+Depth = 10
+Average Accuracy = 93.24
+Standard Deviation = 1.49
+============
+============
+Depth = 21
+Average Accuracy = 93.24
+Standard Deviation = 1.49
+============
+============
+Depth = 15
+Average Accuracy = 93.24
+Standard Deviation = 1.49
+============
+Max accuracy 93.47 is found at depth 6
+Optimal depth = 6
+============
+Training using depth = 6
+Accuracy = 97.3
