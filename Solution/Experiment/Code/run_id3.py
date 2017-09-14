@@ -4,6 +4,11 @@ import operator
 import decision_tree_calculations as dtc
 import data_extraction as de
 import matplotlib.pyplot as plt
+import sys
+
+
+training_file = os.path.abspath("../" + sys.argv[1])
+test_file = os.path.abspath("../" + sys.argv[2])
 
 def split_data(data, split_column, value):
     newdata = []
@@ -59,10 +64,19 @@ def iterate_on_tree(tree, x):
     key_no = list(tree.keys())[0]
     val = x[key_no]
     temp = x[:key_no]
-    temp = np.append(temp, x[key_no:]) 
-    return iterate_on_tree(tree[key_no][val], temp)
+    temp = np.append(temp, x[key_no:])
     
-def predict(file):
+    
+    try:
+        return iterate_on_tree(tree[key_no][val], temp)
+    except:
+        if(val == 0):
+            val = 1
+        if(val==1):
+            val = 0
+        return iterate_on_tree(tree[key_no][val], temp)
+    
+def predict(tree, file):
     prediction = []
     test_data = de.extract_features_and_labels(np.array(de.get_data(file)))
     actual_output = test_data[:,-1]
@@ -76,8 +90,8 @@ def predict(file):
             correct += 1
     return prediction
 
-def predict_and_calc_accuracy(file, actual_output):
-    preds = predict(file)
+def predict_and_calc_accuracy(tree, file, actual_output):
+    preds = predict(tree, file)
     correct = 0
     for i,x in enumerate(preds):
         if x == actual_output[i]:
@@ -95,7 +109,10 @@ def create_pruned_tree(data, labels, depth=0, depth_limit = 1):
         return most_freq(classes)
     
     best_feature = dtc.highest_gain(data[:,:-1], data[:,-1])
+   
+    
     best_feature_label = labels[best_feature]
+    
     tree = {best_feature_label : {}}
     
     del(labels[best_feature])
@@ -115,37 +132,137 @@ def create_pruned_tree(data, labels, depth=0, depth_limit = 1):
     return tree
 
 
-training_file = os.path.abspath( "../Dataset/updated_train.txt")
-test_file = os.path.abspath( "../Dataset/updated_test.txt")
-print("")
-print("")
-print("Reading Training Data: ")
-print("Reading Training Data: Done")
-data = np.array(de.get_data(training_file))
-print("")
-print("Extracting Features from training data:")
-print("Extracting Features from training data: Done")
-data = de.extract_features_and_labels(data)
-labels = de.create_labels(data)
-print("")
-tree = create_pruned_tree(data, labels,0,4)
-print("Running ID3")
-print("Tree created")
-#tree = create_tree(data, labels)
-print("")
-print("")
-print(tree)
-print("")
-print("")
+def question1c():
+    data = np.array(de.get_data(training_file))
+    data = de.extract_features_and_labels(data)
+    labels = de.create_labels(data)
 
-print("Reading and processing test_data")
-test_data = np.array(de.get_data(test_file))
-test_data =  de.extract_features_and_labels(test_data)
-print("Classifying Test Data Results")
-print("Accuracy is : " + str(predict_and_calc_accuracy(test_file, test_data[:,-1])))
+    tree = create_tree(data, labels)
 
-actual_output = test_data[:,-1]
-predictions = predict(test_file)
-plt.scatter(range(len(actual_output)),actual_output, marker = 'o')
-plt.scatter(range(len(actual_output)),actual_output, marker = 'x')
-plt.show()
+    test_data = np.array(de.get_data(test_file))
+    test_data =  de.extract_features_and_labels(test_data)
+
+    actual_output = test_data[:,-1]
+    predictions = predict(tree, test_file)
+        
+    count = 0
+    for i,x in enumerate(actual_output):
+        if x == predictions[i]:
+            count += 1
+    
+    accuracy = count*100/len(actual_output)
+    output = []
+    output.append("Question 1-c")
+    output.append("########################################")
+    output.append("Accuracy on training data: " + str(round(accuracy,2)))
+    output.append("Depth of the tree is: " + str(depth_tree))
+    output.append("########################################")
+    with open(os.path.abspath("../TraceFiles/question1c.trace"), 'w', ) as file:
+        file.write('\n'.join(output))
+    for x in output:
+        print(x)
+
+def question1d():
+    data = np.array(de.get_data(training_file))
+    data = de.extract_features_and_labels(data)
+    labels = de.create_labels(data)
+
+    tree = create_tree(data, labels)
+
+    test_data = np.array(de.get_data(test_file))
+    test_data =  de.extract_features_and_labels(test_data)
+
+    actual_output = test_data[:,-1]
+    predictions = predict(tree, test_file)
+        
+    count = 0
+    for i,x in enumerate(actual_output):
+        if x == predictions[i]:
+            count += 1
+    
+    accuracy = count*100/len(actual_output)
+    output = []
+    output.append("Question 1-c")
+    output.append("########################################")
+    output.append("Accuracy on test data: " + str(round(accuracy,2)))
+    output.append("Depth of the tree is: " + str(depth_tree))
+    output.append("########################################")
+    with open(os.path.abspath("../TraceFiles/question1d.trace"), 'w', ) as file:
+        file.write('\n'.join(output))
+    for x in output:
+        print(x)
+
+def question2():
+    split_folder = os.path.abspath("../" + sys.argv[3])
+    depths = list(map(int, sys.argv[4:]))
+    
+    kfold_files = []
+    for (dirpath, d, files) in os.walk(split_folder):
+        kfold_files = [os.path.join(dirpath,x) for x in files]
+    
+    data_0 = np.array(de.get_data(kfold_files[0]))
+    data_1 = np.array(de.get_data(kfold_files[1]))
+    data_2 = np.array(de.get_data(kfold_files[2]))
+    data_3 = np.array(de.get_data(kfold_files[3]))
+    
+    train_1 = np.concatenate([data_0, data_1, data_2])
+    test_data_1 =  de.extract_features_and_labels(data_3)
+    op1 = test_data_1[:, -1]
+    
+    train_2 = np.concatenate([data_1, data_2, data_3])
+    test_data_2 =  de.extract_features_and_labels(data_0)
+    op2 = test_data_2[:, -1]
+    
+    train_3 = np.concatenate([data_2, data_3, data_0])
+    test_data_3 =  de.extract_features_and_labels(data_1)
+    op3 = test_data_3[:, -1]
+    
+    train_4 = np.concatenate([data_3, data_0, data_1])
+    test_data_4 =  de.extract_features_and_labels(data_2)
+    op4 = test_data_4[:, -1]
+    
+    depth_accuracy_dict = {}
+    
+    
+    
+    for depth in depths:
+        train_d1 = de.extract_features_and_labels(train_1)
+        labels_1 = de.create_labels(train_d1)
+        
+        train_d2 = de.extract_features_and_labels(train_2)
+        labels_2 = de.create_labels(train_d2)
+        
+        train_d3 = de.extract_features_and_labels(train_3)
+        labels_3 = de.create_labels(train_d3)
+        
+        train_d4 = de.extract_features_and_labels(train_4)
+        labels_4 = de.create_labels(train_d4)
+        
+        tree_1 = create_pruned_tree(train_d1, labels_1, 0, depth)
+        depth_tree = 0
+        tree_2 = create_pruned_tree(train_d2, labels_2, 0, depth)        
+        depth_tree = 0
+        tree_3 = create_pruned_tree(train_d3, labels_3, 0, depth)               
+        depth_tree = 0
+        tree_4 = create_pruned_tree(train_d4, labels_4, 0, depth)
+        depth_tree = 0
+        
+        
+        p1 = predict_and_calc_accuracy(tree_1, kfold_files[3], op1)
+        p2 = predict_and_calc_accuracy(tree_2, kfold_files[0], op2)
+        p3 = predict_and_calc_accuracy(tree_3, kfold_files[1], op3)
+        p4 = predict_and_calc_accuracy(tree_4, kfold_files[2], op4)
+        
+        depth_accuracy_dict[depth] = [p1, p2, p3, p4]
+        
+    print(depth_accuracy_dict)
+    
+
+
+if(sys.argv[1] == sys.argv[2]):
+    question1c()
+elif(sys.argv[1] != sys.argv[2]):
+    question1d()
+
+if(len(sys.argv) > 3):
+    question2()
