@@ -1,5 +1,5 @@
 The code has been executed on CADE machine Lab1-1 and uses Python version 3.6
-Execution directory --- /home/kaveri/MachineLearning
+
 
 This directory contains -
 1. Directory Code that contains python source code.
